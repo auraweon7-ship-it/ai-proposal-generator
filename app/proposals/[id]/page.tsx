@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { createServerClient } from '@/lib/supabase/server';
 import GlassCard from '@/components/ui/GlassCard';
 import FaviconImage from '@/components/ui/FaviconImage';
+import DeleteButton from '@/components/features/DeleteButton';
 import ProposalContent from './ProposalContent';
 
 interface Props {
@@ -33,16 +34,19 @@ export default async function ProposalDetailPage({ params }: Props) {
     <div className="max-w-3xl mx-auto px-5 pt-8 pb-20">
 
       {/* 브레드크럼 */}
-      <nav className="flex items-center gap-2 mb-6 text-xs no-print">
-        <Link href="/" className="text-neutral-600 hover:text-neutral-400 transition-colors">
-          홈
-        </Link>
-        <span className="text-neutral-700">/</span>
-        <Link href="/proposals" className="text-neutral-600 hover:text-neutral-400 transition-colors">
-          제안서 목록
-        </Link>
-        <span className="text-neutral-700">/</span>
-        <span className="text-neutral-500 truncate max-w-[200px]">{data.title}</span>
+      <nav className="flex items-center justify-between gap-2 mb-6 text-xs no-print">
+        <div className="flex items-center gap-2">
+          <Link href="/" className="text-neutral-600 hover:text-neutral-400 transition-colors">
+            홈
+          </Link>
+          <span className="text-neutral-700">/</span>
+          <Link href="/proposals" className="text-neutral-600 hover:text-neutral-400 transition-colors">
+            제안서 목록
+          </Link>
+          <span className="text-neutral-700">/</span>
+          <span className="text-neutral-500 truncate max-w-[200px]">{data.title}</span>
+        </div>
+        <DeleteButton proposalId={id} />
       </nav>
 
       {/* 메타 정보 카드 */}
