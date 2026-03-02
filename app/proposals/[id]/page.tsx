@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createServerClient } from '@/lib/supabase/server';
 import GlassCard from '@/components/ui/GlassCard';
+import FaviconImage from '@/components/ui/FaviconImage';
 import ProposalContent from './ProposalContent';
 
 interface Props {
@@ -27,7 +28,6 @@ export default async function ProposalDetailPage({ params }: Props) {
   }
 
   const hostname = getHostname(data.source_url);
-  const faviconUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=32`;
 
   return (
     <div className="max-w-3xl mx-auto px-5 pt-8 pb-20">
@@ -50,17 +50,7 @@ export default async function ProposalDetailPage({ params }: Props) {
         <div className="flex items-start gap-4">
           {/* 파비콘 */}
           <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={faviconUrl}
-              alt=""
-              className="w-5 h-5"
-              onError={(e) => {
-                const el = e.target as HTMLImageElement;
-                el.style.display = 'none';
-                el.parentElement!.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2"/><path d="M5 8h6M8 5v6" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2" strokeLinecap="round"/></svg>`;
-              }}
-            />
+            <FaviconImage domain={hostname} />
           </div>
 
           <div className="min-w-0 flex-1">
